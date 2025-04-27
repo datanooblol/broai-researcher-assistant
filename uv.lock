@@ -225,7 +225,7 @@ wheels = [
 
 [[package]]
 name = "broai"
-version = "0.1.8"
+version = "0.1.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "boto3" },
@@ -237,14 +237,16 @@ dependencies = [
     { name = "marker-pdf" },
     { name = "pandas" },
     { name = "pydantic" },
+    { name = "pyfiglet" },
     { name = "requests" },
     { name = "rich" },
+    { name = "tomlkit" },
     { name = "torch" },
     { name = "transformers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ef/05/8950eb29975caec7970d2de3ec98fa3c765e880b1abda7a0777631f4ca56/broai-0.1.8.tar.gz", hash = "sha256:ac34457dda6713ca9c7809e1802d74408f222eee5901ac451a567db0ea031f72", size = 16576, upload_time = "2025-04-27T14:21:40.669Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/f4/320cb5111dabd20eb39b821c1454e6be911c7fc3162f6c6f0e65b45bb900/broai-0.1.9.tar.gz", hash = "sha256:e4aa4e937ffc733a0082d10764f4828dfc959f4615fe7f8f78fb5b103792cc9d", size = 16638, upload_time = "2025-04-27T15:19:54.808Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/d2/21916828f0c834e64a6b478828c0ca26dc67981a3943f483b2db0168ac89/broai-0.1.8-py3-none-any.whl", hash = "sha256:795824bd26c65bdb71117cc59b99187f99b40656683091ac1e13e7a0c8849d88", size = 22565, upload_time = "2025-04-27T14:21:39.46Z" },
+    { url = "https://files.pythonhosted.org/packages/8a/54/11ded7437b3f8de8749f864b805dcec9cb197cc5c3c274dbfb3b7e26f80a/broai-0.1.9-py3-none-any.whl", hash = "sha256:5cc532bd025b71b28e72d2f7456b582f44e5ff7660aa3ad5f2f2786a079fea42", size = 22594, upload_time = "2025-04-27T15:19:53.575Z" },
 ]
 
 [[package]]
@@ -252,17 +254,15 @@ name = "broai-researcher-assistant"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "beautifulsoup4" },
     { name = "broai" },
-    { name = "pyfiglet" },
-    { name = "tomlkit" },
     { name = "torch" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "broai", specifier = ">=0.1.8" },
-    { name = "pyfiglet", specifier = ">=1.0.2" },
-    { name = "tomlkit", specifier = ">=0.13.2" },
+    { name = "beautifulsoup4", specifier = ">=4.13.4" },
+    { name = "broai", specifier = "==0.1.9" },
     { name = "torch", specifier = "==2.6.0" },
 ]
 
