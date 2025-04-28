@@ -7,7 +7,7 @@ from typing import Tuple, List, Dict, Any, Optional
 # you can use any model sharing the same methods: .run, .SystemMessage, .UserMessage, .AIMessage
 from broai.llm_management.ollama import BedrockOllamaChat
 bedrock_model = BedrockOllamaChat(
-    model_name="us.meta.llama3-2-1b-instruct-v1:0",
+    model_name="us.meta.llama3-2-3b-instruct-v1:0",
     temperature=0,
 )
 

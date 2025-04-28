@@ -18,6 +18,9 @@ class InputContextCompressor(BaseModel):
 class StructuredOutput(BaseModel):
     respond:str = Field(description="An agent's respond to the message based on the task provided in the instructions")
 
+class ExtractedContext(BaseModel):
+    ...
+
 prompt_generator = PromptGenerator(
     persona=Persona(name="John", description="a helpful assistant"),
     instructions=Instructions(

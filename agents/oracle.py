@@ -31,10 +31,10 @@ prompt_generator = PromptGenerator(
         cautions=[
             "do not invent, assume, or fabricate any facts outside prior knowledge",
             "if the information is incomplete or missing, clearly say something like 'Based on the information available, a complete answer is not possible'. do not speculate",
-            "respond in specified JSON format as in examples"
+            # "respond in specified JSON format as in examples"
         ]
     ),
-    structured_output=Answer,
+    # structured_output=Answer,
     examples=Examples(examples=[
         Example(
             setting="A journal article about the effects of meditation on mental health",
@@ -42,9 +42,10 @@ prompt_generator = PromptGenerator(
                 prior_knowledge="Studies have shown that regular meditation can decrease symptoms of anxiety and depression. It can also improve attention span and emotional regulation.",
                 message="How does meditation impact mental health?"
             ),
-            output=Answer(
-                answer="Regular meditation can decrease symptoms of anxiety and depression, and also improve attention span and emotional regulation."
-            )
+            # output=Answer(
+            #     answer="Regular meditation can decrease symptoms of anxiety and depression, and also improve attention span and emotional regulation."
+            # ),
+            output="Regular meditation can decrease symptoms of anxiety and depression, and also improve attention span and emotional regulation."
         ),
         Example(
             setting="A blog post about the history of coffee",
@@ -52,12 +53,14 @@ prompt_generator = PromptGenerator(
                 prior_knowledge="Coffee originated in Ethiopia. It spread to the Arabian Peninsula where it became an important part of cultural life by the 15th century.",
                 message="Where did coffee originate and when did it become popular?"
             ),
-            output=Answer(
-                answer="Coffee originated in Ethiopia and became an important part of cultural life in the Arabian Peninsula by the 15th century."
-            )
+            # output=Answer(
+            #     answer="Coffee originated in Ethiopia and became an important part of cultural life in the Arabian Peninsula by the 15th century."
+            # ),
+            output="Coffee originated in Ethiopia and became an important part of cultural life in the Arabian Peninsula by the 15th century.",
+            
         ),
     ]),
-    fallback=Answer(answer="Could you be more specific?")
+    # fallback=Answer(answer="Could you be more specific?")
 )
 
 Oracle = BroAgent(
