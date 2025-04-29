@@ -32,10 +32,13 @@ prompt_generator = PromptGenerator(
     examples=Examples(examples=[
         Example(setting="Academic journal", input=InputContext(context="This is the input context."), output=Summary(summary="your summary"))
     ]),
-    fallback=Summary(summary="error")
+    fallback=Summary(summary="The information is not proper for summarization.")
 )
 
-ContextEnricher = BroAgent(
-    prompt_generator=prompt_generator,
-    model=bedrock_model
-)
+class ContextEnricher:
+    def __init__(self):
+        self.agent = BroAgent(prompt_generator=prompt_generator, model=bedrock_model)
+
+    def run(self, context:str)->Summary:
+        request = InputContext(context=context)
+        return self.agent.run(request)

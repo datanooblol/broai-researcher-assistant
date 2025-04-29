@@ -40,7 +40,6 @@ prompt_generator = PromptGenerator(
             output=EditedMessage(edited_message="What are the reasons for using LLM, Large Language Model, and RAG, Retrieval-Augmented Generation, together?")
         ),
     ]),
-    # fallback=EditedMessage(edited_message="error"),
     fallback=None
 )
 

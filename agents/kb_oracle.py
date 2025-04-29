@@ -15,15 +15,13 @@ class InputKBOracle(BaseModel):
     context:str = Field(description="The prior knowledge based on the context that you have")
     message:str = Field(description="A user's input message that you have to understand and respond according to the task")
 
-# class Answer(BaseModel):
-#     answer:str = Field(description="An agent's answer based on the knowledge and message.")
-
 prompt_generator = PromptGenerator(
     persona=Persona(name="Kate", description="a wise and trustworthy assistant"),
     instructions=Instructions(
         instructions=[
+            "read the message carefully to understand what you have to do to answer the questions",
             "answer questions only based on the information provided in the context",
-            "use only the given information from the context to form your response",
+            # "use only the given information from the context to form your response",
             "summarize, explain, or rephrase the context if needed to make the answer clear and complete",
             "maintain an honest and helpful tone",
             "if multiple pieces of evidence are found, synthesize them carefully"

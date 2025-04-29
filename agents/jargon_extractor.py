@@ -57,10 +57,18 @@ prompt_generator = PromptGenerator(
             ])
         )
     ]),
-    fallback=Jargons(jargons=[Jargon(jargon="error", evidence="error", explanation="error")])
+    # fallback=Jargons(jargons=[Jargon(jargon="error", evidence="error", explanation="error")]),
+    fallback=None
 )
 
-JargonExtractor = BroAgent(
-    prompt_generator=prompt_generator,
-    model=bedrock_model
-)
+class JargonExtractor:
+    def __init__(self):
+        self.agent = BroAgent(prompt_generator=prompt_generator, model=bedrock_model)
+
+    def run(self, context:str) -> List[Jargon] | None:
+        request = InputContext(context=context)
+        response = self.agent.run(request)
+        if response is not None:
+            return response.jargons
+        return None
+        

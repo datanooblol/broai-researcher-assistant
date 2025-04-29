@@ -6,6 +6,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "torch==2.6.0",
-    "broai==0.1.9",
+    "broai==0.1.10",
     "beautifulsoup4>=4.13.4",
 ]
