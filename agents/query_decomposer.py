@@ -60,10 +60,16 @@ prompt_generator = PromptGenerator(
             ])
         ),
     ]),
-    fallback=DecomposedQueries(sub_queries=["error"])
+    # fallback=DecomposedQueries(sub_queries=["error"]),
+    fallback=None,
 )
 
-QueryDecomposer = BroAgent(
-    prompt_generator=prompt_generator,
-    model=bedrock_model
-)
+class QueryDecomposer:
+    def __init__(self, ):
+        self.agent = BroAgent(prompt_generator=prompt_generator, model=bedrock_model)
+
+    def run(self, payload):
+        request = InputMessage(**payload.model_dump())
+        sub_queries = self.agent.run(request)
+        payload.sub_queries = sub_queries.sub_queries if sub_queries is not None else sub_queries
+        return payload.sub_queries

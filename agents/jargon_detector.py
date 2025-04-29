@@ -63,10 +63,18 @@ prompt_generator = PromptGenerator(
             ])
         ),
     ]),
-    fallback=PotentialJargons(jargons=[PotentialJargon(jargon="error", confidence=0)]),
+    # fallback=PotentialJargons(jargons=[PotentialJargon(jargon="error", confidence=0)]),
+    fallback=None,
 )
 
-JargonDetector = BroAgent(
-    prompt_generator=prompt_generator,
-    model=bedrock_model
-)
+class JargonDetector:
+    def __init__(self, confidence:float=.5):
+        self.agent = BroAgent(prompt_generator=prompt_generator,model=bedrock_model)
+        self.confidence = confidence
+
+    def run(self, payload:BaseModel):
+        request = InputMessage(**payload.model_dump())
+        potential_jargons = self.agent.run(request)
+        detected_jargons = [j for j in potential_jargons.jargons if j.confidence>self.confidence]
+        payload.potential_jargons = [j.jargon for j in detected_jargons]
+        return detected_jargons

@@ -87,7 +87,8 @@ prompt_generator = PromptGenerator(
     ),
     ]),
 
-    fallback=ExtractedContext(extracted_contexts=["error"])
+    # fallback=ExtractedContext(extracted_contexts=["error"]),
+    fallback=None
 )
 
 ContextCompressor = BroAgent(

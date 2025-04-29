@@ -12,7 +12,7 @@ bedrock_model = BedrockOllamaChat(
 )
 
 class InputEditMessage(BaseModel):
-    knowledge:str = Field(description="knowledge of jargons, acronyms, abbreviations and proper names")
+    jargon_knowledge:str = Field(description="knowledge of jargons, acronyms, abbreviations and proper names")
     message:str = Field(description="a user's input message")
 
 class EditedMessage(BaseModel):
@@ -34,16 +34,23 @@ prompt_generator = PromptGenerator(
         Example(
             setting="Academic Journal",
             input=InputEditMessage(
-                knowledge="1: LLM\n Evidence: LLM (Large Language Model) is the advance topic of most research.\nExplanation: LLM is Large Language Model\n\n2: RAG\n Evidence: RAG, retrieval-aumented generation, allows chatbot to connect with the internal knowledge\nExplanation: RAG stands for retrieval-aumented generation",
+                jargon_knowledge="1: LLM\n Evidence: LLM (Large Language Model) is the advance topic of most research.\nExplanation: LLM is Large Language Model\n\n2: RAG\n Evidence: RAG, retrieval-aumented generation, allows chatbot to connect with the internal knowledge\nExplanation: RAG stands for retrieval-aumented generation",
                 message="What are the reasons for using LLM and RAG together?"
             ),
             output=EditedMessage(edited_message="What are the reasons for using LLM, Large Language Model, and RAG, Retrieval-Augmented Generation, together?")
         ),
     ]),
-    fallback=EditedMessage(edited_message="error"),
+    # fallback=EditedMessage(edited_message="error"),
+    fallback=None
 )
 
-JargonEditor = BroAgent(
-    prompt_generator=prompt_generator,
-    model=bedrock_model
-)
+class JargonEditor:
+    def __init__(self, ):
+        self.agent = BroAgent(prompt_generator=prompt_generator, model=bedrock_model)
+
+    def run(self, payload):
+        request = InputEditMessage(**payload.model_dump())
+        edited_message = self.agent.run(request)
+        payload.edited_message = edited_message.edited_message
+        payload.message = payload.edited_message
+        return payload.edited_message
