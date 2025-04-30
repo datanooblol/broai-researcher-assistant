@@ -1,6 +1,7 @@
 from typing import List, Any, Protocol
 from broai.interface import Context
 from broai.experiments.chunk import split_markdown, consolidate_markdown, get_markdown_sections, split_overlap
+from broai.experiments.pdf_to_markdown import pdf_to_markdown
 from tqdm import tqdm
 from pydantic import BaseModel, Field
 from package.jargon_store import JargonRecord
@@ -52,8 +53,10 @@ class OfflineFlow:
         )
     
     def load_and_convert_markdown(self) -> str:
-        with open(self.payload.source, "r") as f:
-            text = f.read()
+        source = self.payload.source
+        text, images = pdf_to_markdown(source)
+        # with open(source, "r") as f:
+        #     text = f.read()
         self.payload.text = text
 
     def chunk(self, ):
